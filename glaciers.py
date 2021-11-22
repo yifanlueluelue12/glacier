@@ -10,7 +10,7 @@ import pandas as pd
 # make Python a powerful and efficient environment for data analysis.
 import matplotlib.pyplot as plt
 import re
-import datetime
+from datetime import datetime
 class Glacier:
     def __init__(self, glacier_id, name, unit, lat, lon, code):
         self.year=[] # define the year as the matrix
@@ -38,7 +38,14 @@ class Glacier:
 
      
     def add_mass_balance_measurement(self, year, mass_balance):
-        raise NotImplementedError
+        currentDateTime = datetime.datetime.now()
+        date = currentDateTime.date()
+        currentyear = date.strftime("%Y")
+        while int(year)<= currentyear and int(year)>= 1963 and year.isdigit()== Ture:
+            print ('the input year is the right value')
+        else :
+            raise ValueError("the input year in the file is a wrong number of because the detection year comes from 1963 to currentyear")
+        
 
     def plot_mass_balance(self, output_path):
         raise NotImplementedError
