@@ -1,5 +1,5 @@
 from utils import haversine_distance
-import pandas as pd
+
 # The Python Data Analysis Library or pandas is a tool based on NumPy 
 # that was created to solve data analysis tasks. pandas incorporates a 
 # large number of libraries and some standard data models to provide the 
@@ -9,7 +9,6 @@ import pandas as pd
 #  and easily. You will soon discover that it is one of the key factors that 
 # make Python a powerful and efficient environment for data analysis.
 import matplotlib.pyplot as plt
-import re
 from datetime import datetime
 class Glacier:
     def __init__(self, glacier_id, name, unit, lat, lon, code):
@@ -36,43 +35,34 @@ class Glacier:
              print ('the value of input longitude is an error')
         self.code =code
 
-     
     def add_mass_balance_measurement(self, year, mass_balance):
         currentDateTime = datetime.datetime.now()
         date = currentDateTime.date()
         currentyear = date.strftime("%Y")
-        while int(year)<= currentyear and int(year)>= 1963 and year.isdigit()== Ture:
-            print ('the input year is the right value')
-        else :
-            raise ValueError("the input year in the file is a wrong number of because the detection year comes from 1963 to currentyear")
-        
+        while int(year) <= currentyear and int(year) >= 1963 and year.isdigit() == Ture:
+            print('the input year is the right value')
+        else:
+            raise ValueError(
+                "the input year in the file is a wrong number of because the detection year comes from 1963 to currentyear")
 
     def plot_mass_balance(self, output_path):
-        raise NotImplementedError
+        plt.plot(self.year, self.mass_balance)
+        plt.xlabel('year')
+        plt.ylabel('mass_balance')
+        plt.savefig('output_path/.png')
+        plt.show()
 
-        
 class GlacierCollection:
-
     def __init__(self, file_path):
-        raise NotImplementedError
-
-    def read_mass_balance_data(self, file_path):
-        raise NotImplementedError
-
-    def find_nearest(self, lat, lon, n):
-        """Get the n glaciers closest to the given coordinates."""
-        raise NotImplementedError
+        self.file_path = file_path
+        self.glacierscollection = glacierscollection
+        glaciersdata = pd.read_csv(self.file_path)
+        print(pd_reader)
+        dataform = list(zip(glaciersdata['WGMS_ID'],glaciersdata['NAME'],glaciersdata['POLITICAL_UNIT'],
+                   glaciersdata['LATITUDE'],glaciersdata['LONGITUDE'],glaciersdata['PRIM_CLASSIFIC'],
+                   glaciersdata['From'],glaciersdata['FRONTAL_CHARS']))
+        
     
-    def filter_by_code(self, code_pattern):
-        """Return the names of glaciers whose codes match the given pattern."""
-        raise NotImplementedError
 
-    def sort_by_latest_mass_balance(self, n, reverse):
-        """Return the N glaciers with the highest area accumulated in the last measurement."""
-        raise NotImplementedError
 
-    def summary(self):
-        raise NotImplementedError
 
-    def plot_extremes(self, output_path):
-        raise NotImplementedError
